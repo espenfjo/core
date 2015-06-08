@@ -279,12 +279,13 @@ class Encryption implements IEncryptionModule {
 	 */
 	public function decrypt($data) {
 		if (empty($this->fileKey)) {
-			$msg = $this->l->t('Can not decrypt this file, probably this is a shared file. Please ask the file owner to reshare the file with you.');
-			$this->logger->error('Can not decrypt this file,
+			$msg = 'Can not decrypt this file,
 			probably this is a shared file.
-			Please ask the file owner to reshare the file with you.');
+			Please ask the file owner to reshare the file with you.';
+			$hint = $this->l->t('Can not decrypt this file, probably this is a shared file. Please ask the file owner to reshare the file with you.');
+			$this->logger->error($msg);
 
-			throw new DecryptionFailedException($msg);
+			throw new DecryptionFailedException($msg, $hint);
 		}
 
 		$result = '';
